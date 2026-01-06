@@ -3,23 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 홈페이지</title>
+    <title>My Home - 환영합니다</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        .feature-card {
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">MySite</a>
-            <div class="navbar-nav">
+            <a class="navbar-brand" href="index.html">My Portfolio</a>
+            <div class="navbar-nav ms-auto">
                 <a class="nav-link active" href="index.html">홈</a>
                 <a class="nav-link" href="about.html">자기소개</a>
                 <a class="nav-link" href="calc.html">계산기</a>
             </div>
         </div>
     </nav>
-    <div class="container mt-5 text-center">
-        <h1>환영합니다! 제 홈페이지입니다.</h1>
-        <p class="lead">Bootstrap을 사용하여 만든 과제 제출용 사이트입니다.</p>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Welcome to My World</h1>
+            <p class="lead">배우고 성장하는 예비 개발자의 공간입니다.</p>
+            <a href="about.html" class="btn btn-light btn-lg mt-3">더 알아보기</a>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-5">
+                <div class="card h-100 shadow-sm feature-card" onclick="location.href='about.html'">
+                    <div class="card-body text-center p-5">
+                        <div class="display-4 mb-3 text-primary">👤</div>
+                        <h3 class="card-title">About Me</h3>
+                        <p class="card-text text-muted">저의 꿈과 열정, 그리고 웹사이트를 만들면서 사용한 기술 스택을 소개합니다.</p>
+                        <button class="btn btn-outline-primary">소개 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card h-100 shadow-sm feature-card" onclick="location.href='calc.html'">
+                    <div class="card-body text-center p-5">
+                        <div class="display-4 mb-3 text-success">➕</div>
+                        <h3 class="card-title">Calculator</h3>
+                        <p class="card-text text-muted">JavaScript로 직접 구현한 사칙연산 계산기를 체험해보세요.</p>
+                        <button class="btn btn-outline-success">계산기 실행</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0">© 2026 지재헌. All rights reserved.</p>
+            <small class="text-secondary">Designed with Bootstrap 5</small>
+        </div>
+    </footer>
+
 </body>
 </html>
