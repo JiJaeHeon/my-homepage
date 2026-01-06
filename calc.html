@@ -2,27 +2,145 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>계산기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기 - My Website</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2>간단 계산기</h2>
-        <div class="card p-4 shadow-sm" style="max-width: 400px;">
-            <input type="number" id="n1" class="form-control mb-2" placeholder="첫 번째 숫자">
-            <input type="number" id="n2" class="form-control mb-2" placeholder="두 번째 숫자">
-            <button onclick="add()" class="btn btn-primary w-100">더하기 결과 보기</button>
-            <h4 class="mt-3 text-center">결과: <span id="res">0</span></h4>
-        </div>
-        <br>
-        <a href="index.html" class="btn btn-outline-secondary">홈으로 돌아가기</a>
-    </div>
-    <script>
-        function add() {
-            const v1 = Number(document.getElementById('n1').value);
-            const v2 = Number(document.getElementById('n2').value);
-            document.getElementById('res').innerText = v1 + v2;
+    <style>
+        
+        .wrap { padding: 40px 16px; }
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
+        .keys button { height: 60px; font-size: 20px; font-weight: bold; }
+        .wide { grid-column: span 2; }
+        .home-btn { margin-top: 20px; text-align: center; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="wrap">
+        <div class="card shadow mx-auto" style="max-width:400px;">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-3">Calculator</h5>
+
+                <input id="display" type="text" class="form-control text-end fs-2 mb-3 bg-white" value="0" readonly>
+
+                <div class="keys">
+                    <button class="btn btn-outline-secondary" data-key="7">7</button>
+                    <button class="btn btn-outline-secondary" data-key="8">8</button>
+                    <button class="btn btn-outline-secondary" data-key="9">9</button>
+                    <button class="btn btn-outline-primary" data-key="÷">÷</button>
+
+                    <button class="btn btn-outline-secondary" data-key="4">4</button>
+                    <button class="btn btn-outline-secondary" data-key="5">5</button>
+                    <button class="btn btn-outline-secondary" data-key="6">6</button>
+                    <button class="btn btn-outline-primary" data-key="×">×</button>
+
+                    <button class="btn btn-outline-secondary" data-key="1">1</button>
+                    <button class="btn btn-outline-secondary" data-key="2">2</button>
+                    <button class="btn btn-outline-secondary" data-key="3">3</button>
+                    <button class="btn btn-outline-primary" data-key="-">-</button>
+
+                    <button class="btn btn-outline-secondary wide" data-key="0">0</button>
+                    <button class="btn btn-danger" data-key="C">C</button>
+                    <button class="btn btn-success" data-key="=">=</button>
+                    <button class="btn btn-outline-primary" data-key="+">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-btn">
+            <a href="index.html" class="btn btn-secondary px-4">홈으로 돌아가기</a>
+        </div>
+    </div>
+
+    <script>
+        
+        const display = document.getElementById("display");
+        const keys = document.querySelector(".keys");
+
+        let first = null;
+        let op = null;
+        let waitingSecond = false;
+
+        function setDisplay(v) {
+            display.value = String(v);
+        }
+
+        function inputDigit(d) {
+            if (waitingSecond) {
+                setDisplay(d);
+                waitingSecond = false;
+                return;
+            }
+            const cur = display.value;
+            setDisplay(cur === "0" ? d : cur + d);
+        }
+
+        function clearAll() {
+            first = null;
+            op = null;
+            waitingSecond = false;
+            setDisplay("0");
+        }
+
+        function compute(a, operator, b) {
+            if (operator === "+") return a + b;
+            if (operator === "-") return a - b;
+            if (operator === "×") return a * b;
+            if (operator === "÷") return b === 0 ? "Error" : a / b;
+            return b;
+        }
+
+        function handleOperator(nextOp) {
+            const cur = Number(display.value);
+            if (first === null) {
+                first = cur;
+            } else if (op && !waitingSecond) {
+                const result = compute(first, op, cur);
+                if (result === "Error") {
+                    setDisplay("Error");
+                    first = null;
+                    op = null;
+                    waitingSecond = true;
+                    return;
+                }
+                first = result;
+                setDisplay(result);
+            }
+            op = nextOp;
+            waitingSecond = true;
+        }
+
+        function doEqual() {
+            if (op === null || first === null) return;
+            const cur = Number(display.value);
+            const result = compute(first, op, cur);
+            if (result === "Error") {
+                setDisplay("Error");
+                first = null;
+                op = null;
+                waitingSecond = true;
+                return;
+            }
+            setDisplay(result);
+            first = result;
+            waitingSecond = true;
+        }
+
+        keys.addEventListener("click", (e) => {
+            const btn = e.target.closest("button");
+            if (!btn) return;
+            const key = btn.dataset.key;
+            if (key >= "0" && key <= "9") inputDigit(key);
+            else if (key === "C") clearAll();
+            else if (key === "=") doEqual();
+            else if (key === "+" || key === "-" || key === "×" || key === "÷") handleOperator(key);
+        });
+
+        clearAll();
     </script>
 </body>
 </html>
