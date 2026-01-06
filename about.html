@@ -2,17 +2,86 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>자기소개</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자기소개 - My Website</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .profile-img { 
+            width: 100%; 
+            max-width: 300px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .skill-badge { font-size: 0.9rem; padding: 8px 12px; margin-right: 5px; margin-bottom: 5px; }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>저를 소개합니다</h2>
-        <hr>
-        <img src="photo.jpg" class="img-thumbnail mb-3" style="width:200px;">
-        <p>이름: 지재헌 </p>
-        <p>소개: 안녕하세요! 웹 프로그래밍 과제 중입니다.</p>
-        <a href="index.html" class="btn btn-outline-secondary">홈으로 돌아가기</a>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">MySite</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link active" href="about.html">자기소개</a>
+                <a class="nav-link" href="calc.html">계산기</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5">
+        <div class="row g-5">
+            <div class="col-md-4 text-center">
+                <img src="photo.jpg" class="profile-img mb-4" alt="내 프로필 사진">
+                <h3>지재헌</h3>
+                <p class="text-muted">빅데이터학과 | 20215251</p>
+                <div class="d-grid gap-2 mt-4">
+                    <a href="index.html" class="btn btn-outline-primary">홈 화면으로 돌아가기</a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <section class="mb-5">
+                    <h2 class="border-bottom pb-2">About Me</h2>
+                    <p class="mt-3 leading-relaxed">
+                        안녕하세요! 한림대학교에서 공부하고있는 <strong>지재헌</strong>입니다. <br>
+                        현재 4학년입니다. 웹사이트 만들기 과제를 수행하고있습니다.  
+                    </p>
+                </section>
+
+                <section class="mb-5">
+                    <h4 class="text-primary">사용한 기술 (Tech Stack)</h4>
+                    <div class="mt-3">
+                        <span class="badge rounded-pill bg-primary skill-badge">HTML5</span>
+                        <span class="badge rounded-pill bg-success skill-badge">CSS3</span>
+                        <span class="badge rounded-pill bg-info skill-badge">Bootstrap 5</span>
+                        <span class="badge rounded-pill bg-warning text-dark skill-badge">JavaScript</span>
+                        <span class="badge rounded-pill bg-dark skill-badge">Git & Github</span>
+                    </div>
+                </section>
+
+                <section class="mb-5">
+                    <h4 class="text-primary">이번 프로젝트 특징</h4>
+                    <ul class="list-group list-group-flush shadow-sm rounded">
+                        <li class="list-group-item"> <strong>반응형 디자인:</strong> 모바일과 PC 어디서든 최적화된 화면 제공</li>
+                        <li class="list-group-item"> <strong>계산기 기능:</strong> JS를 활용한 실제 사칙연산 로직 구현</li>
+                        <li class="list-group-item"> <strong>Github 배포:</strong> Github Pages를 이용한 실시간 웹 사이트 호스팅</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4 class="text-primary">나의 목표</h4>
+                    <p>정보 보안 분야에서 깊이 있는 전문 지식을 쌓아 기업의 IT 인프라와 데이터를 안전하게 보호하는데 기여하고 싶습니다.</p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <footer class="py-4 bg-light border-top mt-5">
+        <div class="container text-center text-muted">
+            <small>&copy; 2026 지재헌. All rights reserved.</small>
+        </div>
+    </footer>
+
 </body>
 </html>
